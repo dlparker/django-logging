@@ -156,7 +156,7 @@ Default Settings
 
 :python:`DISABLE_EXISTING_LOGGERS = True` - Set this to False if you want to combine with multiple loggers.
 
-:python:`LOG_PATH = '{}/logs'.format(settings.BASE_DIR)` - If the logs folder does not exist, it will be created. (did not work in original, work in fork)
+:python:`LOG_PATH = '{}/logs'.format(settings.BASE_DIR)` - If the logs folder does not exist, it will be created.
 
 :python:`IGNORED_PATHS = ['/admin', '/static', '/favicon.ico']` - List of URL endpoints to ignore.
 
@@ -181,14 +181,15 @@ Default Settings
 
 Fork Change Log
 ===============
-       [2017-1-18] 15:30 CDT
+[2017-1-18] 15:30 CDT
 
 - Changed behavior of settings so that it honors LOG_PATH if it present, then uses django.conf.settings.BASE_DIR + '/logs', unless that setting is missing in which case it uses  pwd + "/logs";
 - Added EXTRA_HANDLERS to settings to allow you to create your own handler class and add it to the set of pre-defined handlers.
 - Added OVERRIDE_HANDLERS to settiongs to allow you to completely replace the pre-defined handlers with your own set.
 
 
-       [2017-1-18] 11:00 CDT
+
+[2017-1-18] 11:00 CDT
 Fork and update of this file
 
 
