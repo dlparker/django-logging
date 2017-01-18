@@ -39,13 +39,13 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'DEBUG',
-            'class': 'django_logging.handlers.ConsoleHandler',
+            'class': 'django_logging_dlp.handlers.ConsoleHandler',
             'formatter': 'verbose',
             'stream': sys.stderr
         },
         'default': {
             'level': 'INFO',
-            'class': 'django_logging.handlers.AppFileHandler',
+            'class': 'django_logging_dlp.handlers.AppFileHandler',
             'formatter': 'verbose',
             'maxBytes': settings.ROTATE_MB * 1024 * 1024,
             'backupCount': settings.ROTATE_COUNT,
@@ -53,7 +53,7 @@ LOGGING = {
         },
         'debug': {
             'level': 'DEBUG',
-            'class': 'django_logging.handlers.DebugFileHandler',
+            'class': 'django_logging_dlp.handlers.DebugFileHandler',
             'formatter': 'verbose',
             'maxBytes': settings.ROTATE_MB * 1024 * 1024,
             'backupCount': settings.ROTATE_COUNT,
@@ -61,7 +61,7 @@ LOGGING = {
         },
         'sql': {
             'level': 'DEBUG',
-            'class': 'django_logging.handlers.SQLFileHandler',
+            'class': 'django_logging_dlp.handlers.SQLFileHandler',
             'formatter': 'sql',
             'maxBytes': settings.ROTATE_MB * 1024 * 1024,
             'backupCount': settings.ROTATE_COUNT,
@@ -76,6 +76,18 @@ LOGGING = {
         },
     }
 }
+if len(settings.OVERRIDE_HANDLERS) > 0:
+    LOGGING['handlers'] = {}
+    LOGGING['loggers']['dl_logger']['handlers'] = []
+    for handler in settings.OVERRIDE_HANDLERS:
+        LOGGING['handlers'][handler['name']] = handler['config']
+        LOGGING['loggers']['dl_logger']['handlers'].append(handler['name'])
+
+
+for handler in settings.EXTRA_HANDLERS:
+    LOGGING['handlers'][handler['name']] = handler['config']
+    LOGGING['loggers']['dl_logger']['handlers'].append(handler['name'])
+
 logging.config.dictConfig(LOGGING)
 
 

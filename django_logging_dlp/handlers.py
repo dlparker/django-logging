@@ -137,4 +137,3 @@ class SQLFileHandler(RotatingFileHandler):
                 fh_out.writelines(fh_in)
             fh_in.seek(0)
             fh_in.truncate()
-

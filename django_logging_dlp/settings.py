@@ -23,14 +23,17 @@ class DjangoLoggingSettings(object):
             ROTATE_COUNT=10,
             INDENT_CONSOLE_LOG=2,
             ELASTICSEARCH_ENABLED=False,
-            ELASTICSEARCH_HOSTS=["localhost"]
+            ELASTICSEARCH_HOSTS=["localhost"],
+            EXTRA_HANDLERS=[],
+            OVERRIDE_HANDLERS=[],
         )
 
-        try:
-            self.__settings['LOG_PATH'] = os.path.join(django_settings.BASE_DIR, 'logs')
-        except AttributeError:
-            raise ImproperlyConfigured('settings.BASE_DIR is note defined. Please define settings.BASE_DIR or override '
-                                       'django_logging.LOG_PATH')
+
+        if self.__settings.get('LOG_PATH') is None:
+            try:
+                self.__settings['LOG_PATH'] = os.path.join(django_settings.BASE_DIR, 'logs')
+            except AttributeError:
+                self.__settings['LOG_PATH'] = os.path.join('.', 'logs')
         try:
             self.__settings.update(user_settings)
         except TypeError:
@@ -43,6 +46,6 @@ class DjangoLoggingSettings(object):
 
     def __getattr__(self, name):
         return self.__settings.get(name)
-            
+
 
 sys.modules[__name__] = DjangoLoggingSettings()

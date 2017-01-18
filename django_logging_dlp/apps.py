@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DjangoLoggingConfig(AppConfig):
-    name = 'django_logging'
+    name = 'django_logging_dlp'

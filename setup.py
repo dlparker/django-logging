@@ -9,23 +9,27 @@ def readme():
 
 
 def version():
-    pattern = re.compile(r'__version__ = \'([\d\.]+)\'')
-    with open(os.path.join('django_logging', '__init__.py')) as f:
+    #pattern = re.compile(r'__version__ = \'([\d\.]+)\'')
+    with open(os.path.join('django_logging_dlp', '__init__.py')) as f:
         data = f.read()
-        return re.search(pattern, data).group(1)
+        target = '__version__ = '
+        index = data.index(target)
+        index += len(target)
+        value = data[index:].split()[0]
+        return value
 
 
 setup(
-    name='django-logging-json',
+    name='django-logging-json-dlp',
     version=version(),
     packages=find_packages(),
     include_package_data=True,
     license='BSD',
-    description='A simple Django app to log requests/responses in various formats, such as JSON.',
+    description='A simple Django app to log requests/responses in various formats, such as JSON. Fork of https://github.com/cipriantarta/django-logging with added controls for user.',
     long_description=readme(),
-    url='https://github.com/cipriantarta/django-logging',
-    author='Ciprian Tarta',
-    author_email='me@cipriantarta.ro',
+    url='https://github.com/dlparker/django-logging',
+    author='Ciprian Tarta, Dennis Parker',
+    author_email='me@cipriantarta.ro, dennis@windhavengroup.com',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',

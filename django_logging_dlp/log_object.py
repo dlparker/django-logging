@@ -48,16 +48,20 @@ class BaseLogObject(object):
 
 
 class LogObject(BaseLogObject):
-    def __init__(self, request, response):
+
+    def __init__(self, request, response, delta=None):
         super(LogObject, self).__init__(request)
         self.response = response
+        self.delta = delta
 
     @property
     def to_dict(self):
         result = dict(
             request=self.format_request(),
-            response=self.format_response()
+            response=self.format_response(),
         )
+        if self.delta:
+            result['time_delta'] = self.delta
         return result
 
     @property
