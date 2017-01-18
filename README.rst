@@ -1,11 +1,13 @@
 .. role:: python(code)
     :language: python
 
-Django Logging
-==============
+Django Logging DLP Fork
+=======================
 
 A Django library that logs request, response and exception details in a JSON document.
 It uses the python rotation mechanism to rotate the file logs, but the rotation files will be gziped and it has support for sending the log messages to Elasticsearch.
+
+This fork adds more user control of the configuration and features such as formatters and handlers.
 
 .. image:: https://badge.fury.io/py/django-logging-json.svg
     :target: https://badge.fury.io/py/django-logging-json
@@ -15,13 +17,8 @@ Installation
 
 .. code-block:: python
 
-    pip install git+https://github.com/cipriantarta/django-logging
+    pip install git+https://github.com/dlparker/django-logging.git
 
-or
-
-.. code-block:: python
-
-    pip install django-logging-json
 
 Quick start
 ===========
@@ -31,7 +28,7 @@ Quick start
 
     INSTALLED_APPS = (
         ...
-        'django_logging',
+        'django_logging_dlp',
     )
 
 
@@ -40,7 +37,7 @@ Quick start
 .. code-block:: python
 
     MIDDLEWARE_CLASSES = (
-        'django_logging.middleware.DjangoLoggingMiddleware',
+        'django_logging_dlp.middleware.DjangoLoggingMiddleware',
         ...
     )
 
@@ -121,7 +118,7 @@ To log debug messages:
 
 .. code-block:: python
 
-    from django_logging import log
+    from django_logging_dlp import log
 
     log.debug('debug message')
 
@@ -129,7 +126,7 @@ To log handled exceptions:
 
 .. code-block:: python
 
-    from django_logging import log, ErrorLogObject
+    from django_logging_dlp import log, ErrorLogObject
 
     log.error(ErrorLogObject(request, exception))
 
@@ -175,9 +172,16 @@ Default Settings
 
 :python:`ELASTICSEARCH_HOSTS = ["localhost"]` - Elasticsearch hosts
 
+Fork Change Log
+===============
 
-Change Log
-==========
+       [2017-1-18]
+Fork and update of this file 
+
+
+
+Original Change Log
+===================
 
 1.5.3 [2016-06-26]
 ------------------
