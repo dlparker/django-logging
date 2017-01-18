@@ -12,8 +12,6 @@ This fork adds more user control of the configuration of handlers and supports c
 There is a test django project companion repo at https://github.com/dlparker/test_project_django_logging_dlp. If you take a look at that project, in the utils/handler.py file you will see a custom handler. You can see the configuration of that handler as an extra in the project settings.py file. You can see the configuration of the same handler as the only handler in the replace_settings.py file.
 
 
-.. image:: https://badge.fury.io/py/django-logging-json.svg
-    :target: https://badge.fury.io/py/django-logging-json
 
 Installation
 ============
